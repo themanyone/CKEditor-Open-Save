@@ -46,7 +46,7 @@ CKEDITOR.plugins.add('open_save', {
             var textFile = new Blob([text], {
                 type: 'text/html'
             });
-            title = prompt("Enter a new name, or press Enter to save as \"" + thisDoc + "\"", thisDoc);
+            var title = prompt("Enter a new name, or press Enter to save as \"" + thisDoc + "\"", thisDoc) || null;
             return title? invokeSaveAsDialog(textFile, title + ".html"): false;
         }
         /** from Muaz Khan. (2017). WebRTC and the Web!
