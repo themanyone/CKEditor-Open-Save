@@ -1,6 +1,6 @@
 /**  
 * @fileOverview File Open / Save plugin
-* @license Copyright (c) 2017-2019 by Henry Kroll III of thenerdshow.com All rights reserved.
+* @license Copyright (c) 2017-2020 by Henry Kroll III of thenerdshow.com All rights reserved.
 * For a copy of the Apache 2.0 license, see LICENSE.txt
 */
 
@@ -8,7 +8,10 @@
 
 CKEDITOR.plugins.add('open_save', {
     icons: 'open_icon,save_icon',
+    lang: 'af,ar,az,bg,bn,bs,ca,cs,cy,da,de,de-ch,el,en,en-au,en-ca,en-gb,eo,es,es-mx,et,eu,fa,fi,fo,fr,fr-ca,gl,gu,he,hi,hr,hu,id,is,it,ja,ka,km,ko,ku,lt,lv,mk,mn,ms,nb,nl,no,oc,pl,pt,pt-br,ro,ru,si,sk,sl,sq,sr,sr-latn,sv,th,tr,tt,ug,uk,vi,zh,zh-cn',
     init: function(editor){
+        var pluginName = 'open_save',
+        lang = editor.lang.open_save;
         window.fil = new CKEDITOR.dom.element('input');
         fil.$.id = 'file';
         fil.$.type = 'file';
@@ -26,13 +29,13 @@ CKEDITOR.plugins.add('open_save', {
         });
         
         editor.ui.addButton('FileOpen', {
-            label: 'Open Document',
+            label: lang.open,
             command: 'openFile',
             icon: 'open_icon', // http://www.fedoraproject.org/
             toolbar: 'document,1'
         });
         editor.ui.addButton('FileSave', {
-            label: 'Save Document',
+            label: lang.save,
             command: 'saveFile',
             icon: 'save_icon', // http://www.myiconfinder.com/
             toolbar: 'document,1'
@@ -48,7 +51,7 @@ CKEDITOR.plugins.add('open_save', {
             var textFile = new Blob([text], {
                 type: 'text/html'
             });
-            var title = prompt("Enter a new name, or press Enter to save as \"" + thisDoc + "\"", thisDoc) || null;
+            var title = prompt(lang.msg + " \"" + thisDoc + "\"", thisDoc) || null;
             return title? invokeSaveAsDialog(textFile, title + ".html"): false;
         }
         /** from Muaz Khan. (2017). WebRTC and the Web!
