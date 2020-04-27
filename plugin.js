@@ -7,7 +7,7 @@
 'use strict';
 
 CKEDITOR.plugins.add('open_save', {
-    icons: 'open_save',
+    icons: 'open_icon,save_icon',
     init: function(editor){
         window.fil = new CKEDITOR.dom.element('input');
         fil.$.id = 'file';
@@ -19,24 +19,26 @@ CKEDITOR.plugins.add('open_save', {
                 fil.$.click();
             }
         });
-        editor.addCommand('save', {
+        editor.addCommand('saveFile', {
             exec : function(editor){
                 fileSave(editor);
             }
         });
         
-        editor.ui.addButton('Open', {
+        editor.ui.addButton('FileOpen', {
             label: 'Open Document',
             command: 'openFile',
-            icon: 'plugins/open_save/icons/document-open.png' // http://www.fedoraproject.org/
+            icon: 'open_icon', // http://www.fedoraproject.org/
+            toolbar: 'document,1'
         });
-        editor.ui.addButton('Save', {
+        editor.ui.addButton('FileSave', {
             label: 'Save Document',
-            command: 'save',
-            icon: 'plugins/open_save/icons/save.gif' // http://www.myiconfinder.com/
+            command: 'saveFile',
+            icon: 'save_icon', // http://www.myiconfinder.com/
+            toolbar: 'document,1'
         });
         editor.setKeystroke([
-                [ CKEDITOR.CTRL + 83 /*S*/, 'save' ],
+                [ CKEDITOR.CTRL + 83 /*S*/, 'saveFile' ],
                 [ CKEDITOR.CTRL + 79 /*O*/, 'openFile' ],
         ]);
         
@@ -107,7 +109,7 @@ CKEDITOR.plugins.add('open_save', {
         editor.on('instanceReady', function(e){
             editor.setKeystroke(
                 [ CKEDITOR.CTRL + 79 /*O*/, 'openFile' ],
-                [ CKEDITOR.CTRL + 83 /*S*/, 'save' ],
+                [ CKEDITOR.CTRL + 83 /*S*/, 'saveFile' ],
             );
 
             // from Bidelman, E. (2010). Reading files in JavaScript using the File APIs. [tutorial] Retrieved from https://www.html5rocks.com/en/tutorials/file/dndfiles/
